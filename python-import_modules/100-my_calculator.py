@@ -11,13 +11,13 @@ if __name__ == "__main__":
     op = sys.argv[2]
     b = int(sys.argv[3])
 
-    if op == "+":
+    if op == '+':
         result = add(a, b)
-    elif op == "-":
+    elif op == '-':
         result = sub(a, b)
-    elif op == "*":
+    elif op == '*':
         result = mul(a, b)
-    elif op == "/":
+    elif op == '/':
         result = div(a, b)
     else:
         print("Unknown operator. Available operators: +, -, * and /")
