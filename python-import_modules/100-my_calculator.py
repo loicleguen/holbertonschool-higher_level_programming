@@ -8,16 +8,16 @@ if __name__ == "__main__":
         sys.exit(1)
 
     a = int(sys.argv[1])
-    op = sys.argv[2]
+    operator = sys.argv[2]
     b = int(sys.argv[3])
 
-    if op == '+':
+    if operator == '+':
         result = add(a, b)
-    elif op == '-':
+    elif operator == '-':
         result = sub(a, b)
-    elif op == '*':
+    elif operator == '*':
         result = mul(a, b)
-    elif op == '/':
+    elif operator == '/':
         result = div(a, b)
     else:
         print("Unknown operator. Available operators: +, -, * and /")
