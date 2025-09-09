@@ -1,0 +1,91 @@
+>>> add_integer = __import__('0-add_integer').add_integer
+
+# Test cases for integers (should not raise errors)
+>>> add_integer(1, 2)
+3
+>>> add_integer(-1, -2)
+-3
+>>> add_integer(-1, 2)
+1
+>>> add_integer(1, -2)
+-1
+>>> add_integer(0, 0)
+0
+>>> add_integer(0, 1)
+1
+>>> add_integer(1, 0)
+1
+
+# Test cases for floats (should not raise errors)
+>>> add_integer(2.3, 3.3)
+5
+>>> add_integer(2.0, 3.0)
+5
+>>> add_integer(2.3, 3)
+5
+>>> add_integer(2, 3.3)
+5
+
+# Test cases with default parameter b (should not raise errors)
+>>> add_integer(1)
+99
+>>> add_integer(-1)
+97
+>>> add_integer(2.5)
+100
+>>> add_integer(0)
+98
+
+# Test cases with large numbers (should not raise errors)
+>>> add_integer(10**10, 10**10)
+20000000000
+>>> add_integer(1e10, 1e10)
+20000000000
+
+# Test cases for type validation (should raise TypeError)
+>>> add_integer("a", 5)
+Traceback (most recent call last):
+TypeError: a must be an integer
+>>> add_integer(3, "b")
+Traceback (most recent call last):
+TypeError: b must be an integer
+>>> add_integer([1, 2], 5)
+Traceback (most recent call last):
+TypeError: a must be an integer
+>>> add_integer(3, {1, 2})
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+# Test cases with boolean arguments (should raise TypeError)
+>>> add_integer(None, None)
+Traceback (most recent call last):
+TypeError: a must be an integer
+>>> add_integer(None, 5)
+Traceback (most recent call last):
+TypeError: a must be an integer
+>>> add_integer(3, None)
+Traceback (most recent call last):
+TypeError: b must be an integer
+
+# Test cases with missing or undefined data aka Not a Number (NaN)  (should raise ValueError)
+>>> add_integer(float('nan'), 5)
+Traceback (most recent call last):
+ValueError: cannot convert float NaN to integer
+>>> add_integer(3, float('nan'))
+Traceback (most recent call last):
+ValueError: cannot convert float NaN to integer
+
+
+# Test cases with infinity and negative infinity (should raise OverflowError)
+>>> add_integer(float('-inf'), 5)
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
+>>> add_integer(3, float('-inf'))
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
+>>> add_integer(float('inf'), 5)
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
+>>> add_integer(3, float('inf'))
+Traceback (most recent call last):
+OverflowError: cannot convert float infinity to integer
