@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 def add_integer(a, b=98):
-        """
+    """
     Method that adds two integers
     Floats are accepted but cast to integers
 
@@ -9,7 +9,8 @@ def add_integer(a, b=98):
 
     :raises TypeError: if a or b are anything other than int or float
 
-    :Returns: int - the sum"""
+    :Returns: int - the sum
+    """
     if not isinstance(b, (int, float)):
         raise TypeError("b must be an integer")
     if not isinstance(a, (int, float)):
