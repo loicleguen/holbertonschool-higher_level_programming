@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Module compiled with Python3
+"""
 def add_integer(a, b=98):
     """
     Method that adds two integers
