@@ -10,4 +10,4 @@ def text_indentation(text):
             print()
             x = ""
     if x.strip():
-        print(x, end="")
+        print(x.strip(), end="")
