@@ -8,6 +8,9 @@ class TestMaxInteger(unittest.TestCase):
     """Test cases for max_integer function"""
 
     def test_max_end(self):
+        self.assertEqual(max_integer([4, 2, 3, 1]), 4)
+
+    def test_max_end(self):
         self.assertEqual(max_integer([1, 2, 3, 4]), 4)
 
     def test_max_middle(self):
