@@ -312,4 +312,4 @@ guillaume@ubuntu:~/$
 
 
 ## Authors
-Ksyv - [GitHub Profile](https://github.com/loicleguen)
+loicleguen - [GitHub Profile](https://github.com/loicleguen)
