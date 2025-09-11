@@ -13,9 +13,9 @@
 
 ## Resources
 ### Read or watch:
-* [doctest — Test interactive Python examples](/rltoken/Hmd_LI8NZ-F2ymDxue5HCg)
-* [doctest – Testing through documentation](/rltoken/fbFfGNFU07L2yD0D1uc-Xg)
-* [Unit Tests in Python](/rltoken/LhbdUZYzqiP7cjxjE3rG3w)
+* [doctest — Test interactive Python examples](https://docs.python.org/3.4/library/doctest.html)
+* [doctest – Testing through documentation](https://pymotw.com/3/doctest/)
+* [Unit Tests in Python](https://www.youtube.com/watch?v=1Lfv5tUGsn8)
 
 ## Learning Objectives
 At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
@@ -340,4 +340,4 @@ guillaume@ubuntu:~/$
 
 
 ## Authors
-Ksyv - [GitHub Profile](https://github.com/ksyv)
+loicleguen - [GitHub Profile](https://github.com/loicleguen)
