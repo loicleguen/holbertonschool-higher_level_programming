@@ -13,14 +13,14 @@
 TraceBack (most recent call last):
 ValueError: size must be >= 0
 
->>> print_square(5.6)
+>>> print_square(-5.6)
 TraceBack (most recent call last):
 TypeError: size must be an integer
 
 >>> print_square("domif")
 TraceBack (most recent call last):
-TypeErrorError: size must be an integer
+TypeError: size must be an integer
 
 >>> print_square()
 TraceBack (most recent call last):
-TypeErrorError: print_square missing 1 required positional argument: 'size'
+TypeError: print_square missing 1 required positional argument: 'size'
