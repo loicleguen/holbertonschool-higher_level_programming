@@ -7,7 +7,6 @@ Module defining a Square with size and area
 class Square:
     """Class that defines a square"""
 
-
     @property
     def size(self):
         return self.__size
