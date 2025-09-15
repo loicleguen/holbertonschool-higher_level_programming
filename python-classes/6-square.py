@@ -7,7 +7,6 @@ Module defining a Square with size and area
 class Square:
     """Class that defines a square"""
 
-
     @property
     def size(self):
         return self.__size
@@ -33,7 +32,7 @@ class Square:
             raise TypeError("position must be a tuple of 2 positive integers")
         self.__position = value
 
-    def __init__(self, size=0, position =(0, 0)):
+    def __init__(self, size=0, position=(0, 0)):
         self.size = size
         self.position = position
 
