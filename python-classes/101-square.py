@@ -40,12 +40,14 @@ class Square:
         return self.size ** 2
 
     def my_print(self):
-        print(self.__str__(), end="")
+        print(self.__str__())
 
     def __str__(self):
         if self.size == 0:
-            return "\n"
-        lines = [""] * self.position[1]
-        for _ in range(self.size):
-            lines.append(" " * self.position[0] + "#" * self.size)
-        return "\n".join(lines)
+            return ""
+        square_string = ""
+        square_string += "\n" * self.__position[1]
+        for i in range(self.__size):
+            line = " " * self.__position[0] + "#" * self.__size
+            square_string += line + "\n"
+        return square_string[:-1]
