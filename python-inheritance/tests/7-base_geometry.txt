@@ -6,13 +6,9 @@
 >>> type(bg)
 <class '7-base_geometry.BaseGeometry'>
 
->>> bg = BaseGeometry()
-
 >>> bg.area()
 Traceback (most recent call last):
 Exception: area() is not implemented
-
->>> bg = BaseGeometry()
 
 >>> bg.integer_validator("my_int", 12)
 
