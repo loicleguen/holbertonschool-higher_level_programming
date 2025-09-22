@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Defines an abstract base class Shape with area and perimeter methods, and
 concrete Circle and Rectangle classes implementing these methods.
 Also includes a function to display shape information."""
