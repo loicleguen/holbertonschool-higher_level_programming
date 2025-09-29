@@ -4,6 +4,7 @@ convert its nameibutes to a dictionary."""
 
 
 class Student:
+    """Represents a student."""
     def __init__(self, first_name, last_name, age):
         self.first_name = first_name
         self.last_name = last_name
@@ -21,5 +22,6 @@ class Student:
             return new_dict
 
     def reload_from_json(self, json):
+        """Replaces all attributes of the Student instance."""
         for key, value in json.items():
             setattr(self, key, value)
