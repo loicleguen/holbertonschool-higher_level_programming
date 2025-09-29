@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Module that defines a function to generate Pascal's triangle."""
 def pascal_triangle(n):
+    """Generates Pascal's triangle up to n rows."""
     if n <= 0:
         return []
 
