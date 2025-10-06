@@ -1,39 +1,56 @@
 #!/usr/bin/python3
-from http.server import HTTPServer, BaseHTTPRequestHandler
+import http.server
 import json
 
 
-class SimpleAPIHandler(BaseHTTPRequestHandler):
+class MyHandler(http.server.BaseHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/':
             self.send_response(200)
-            self.send_header("Content-type", "text/plain; charset=utf-8")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
             self.wfile.write(b"Hello, this is a simple API!")
 
         elif self.path == '/data':
-            data = {"name": "John", "age": 30, "city": "New York"}
+            data = {
+                "name": "John",
+                "age": 30,
+                "city": "New York"
+            }
             self.send_response(200)
-            self.send_header("Content-type", "application/json; charset=utf-8")
+            self.send_header('Content-type', 'application/json')
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode('utf-8'))
+            self.wfile.write(json.dumps(data).encode())
 
         elif self.path == '/status':
-            data = {"status": "OK"}
             self.send_response(200)
-            self.send_header("Content-type", "application/json; charset=utf-8")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json.dumps(data).encode('utf-8'))
-
+            self.wfile.write(b"OK")
+        
         else:
             self.send_response(404)
-            self.send_header("Content-type", "application/json; charset=utf-8")
+            self.send_header('Content-type', 'text/plain')
             self.end_headers()
-            self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode('utf-8'))
+            self.wfile.write(b"Endpoint not found")
+
+def run_server(port=8000):
+    server_address = ('', port)
+    httpd = http.server.HTTPServer(server_address, MyHandler)
+    print(f"Server running on port {port}...")
+    print(f"Access it at: http://localhost:{port}")
+    print("\nAvailable endpoints:")
+    print(f"  - http://localhost:{port}/")
+    print(f"  - http://localhost:{port}/data")
+    print(f"  - http://localhost:{port}/status")
+
+    try:
+        httpd.serve_forever()
+    except KeyboardInterrupt:
+        print("\n\nServer stopped.")
+        httpd.server_close()
 
 
 if __name__ == "__main__":
-    server_address = ('', 8000)
-    httpd = HTTPServer(server_address, SimpleAPIHandler)
-    print("✅ Server running on http://localhost:8000")
-    httpd.serve_forever()
+    run_server()
+    
