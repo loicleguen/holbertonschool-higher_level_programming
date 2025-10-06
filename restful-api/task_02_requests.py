@@ -12,8 +12,8 @@ def fetch_and_print_posts():
         posts = response.json()
         for post in posts:
             print(post["title"])
-        else:
-            print("Erreur lors de la récupération des posts.")
+    else:
+        print("Erreur lors de la récupération des posts.")
 
 def fetch_and_save_posts():
     """Fetches posts from JSONPlaceholder and saves them into a CSV file."""
