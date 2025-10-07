@@ -1,41 +1,75 @@
 #!/usr/bin/python3
-from flask import Flask, jsonify, request
+from flask import Flask
+from flask import jsonify
+from flask import make_response
+from flask import request
 
 
-users = {"jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"}, "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}}
+HOST = '0.0.0.0'
+PORT = 5000
+
+USERS = {"jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"}, "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}}
+
 app = Flask(__name__)
+
 @app.route('/')
 def home():
-    return "Welcome to the Flask API!"
+    return "Welcome to the Flask API!", 200
 
-@app.route('/status')
-def status():
-    return "OK"
 
 @app.route('/data')
 def get_data():
-    return jsonify(list(users.keys()))
+    return jsonify(list(USERS.keys())), 200
 
-@app.route("/users/<username>")
+
+@app.route('/status')
+def get_status():
+    response = make_response("OK", 200)
+    response.headers["Content-Type"] = "text/plain"
+    return response
+
+
+@app.route('/users/<username>')
 def get_user(username):
-    user = users.get(username)
+    user = USERS.get(username)
     if user:
-        return jsonify(user)
+        return jsonify(user), 200
     else:
         return jsonify({"error": "User not found"}), 404
 
+
+@app.route('/users')
+def get_all_users():
+    return jsonify(USERS), 200
+
+
 @app.route('/add_user', methods=['POST'])
 def add_user():
-    data = request.get_json()
-    if not data or 'username' not in data:
+    user_data = request.get_json()
+
+    if not user_data:
         return jsonify({"error": "Username is required"}), 400
-    username = data["username"]
-    users[username] = data
+    
+    if 'username' not in user_data:
+        return jsonify({"error": "Username is required"}), 400
+
+    username = user_data['username']
+
+    USERS[username] = user_data
+
     return jsonify({
         "message": "User added",
-        "user": data
+        "user": user_data
     }), 201
 
 
-if __name__ == "__main__":
-    app.run(port=5000)
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({"error": "Endpoint not found"}), 404)
+
+
+if __name__ == '__main__':
+    print(f"Starting Flask server on http://localhost:{PORT}...")
+    print(f"(Accessible via {HOST}:{PORT})")
+
+    app.run(host=HOST, port=PORT, debug=True)
