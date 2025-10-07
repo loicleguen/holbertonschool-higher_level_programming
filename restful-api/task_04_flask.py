@@ -8,7 +8,7 @@ from flask import request
 HOST = '0.0.0.0'
 PORT = 5000
 
-USERS = {"jane": {"username": "jane", "name": "Jane", "age": 28, "city": "Los Angeles"}, "john": {"username": "john", "name": "John", "age": 30, "city": "New York"}}
+USERS = {}
 
 app = Flask(__name__)
 
