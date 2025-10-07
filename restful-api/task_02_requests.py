@@ -1,35 +1,40 @@
 #!/usr/bin/python3
 import requests
-import csv
 import json
+import csv
+
 
 def fetch_and_print_posts():
-    """Fetches posts from JSONPlaceholder and prints the titles."""
     url = "https://jsonplaceholder.typicode.com/posts"
     response = requests.get(url)
     print(f"Status Code: {response.status_code}")
+
     if response.status_code == 200:
         posts = response.json()
         for post in posts:
-            print(post["title"])
-    else:
-        print("Erreur lors de la récupération des posts.")
+            print(post.get('title'))
+
 
 def fetch_and_save_posts():
-    """Fetches posts from JSONPlaceholder and saves them into a CSV file."""
     url = "https://jsonplaceholder.typicode.com/posts"
     response = requests.get(url)
+    
     if response.status_code == 200:
-        posts = response.json()
-        data = [
-            {"id": post["id"], "title": post["title"], "body": post["body"]}
-            for post in posts
-        ]
+        posts_data = response.json()
+        structured_data = []
+        for post in posts_data:
+            structured_data.append({
+                'id': post.get('id'),
+                'title': post.get('title'),
+                'body': post.get('body')
+            })
 
-        with open("posts.csv", mode="w", newline="", encoding="utf-8") as f:
-            writer = csv.DictWriter(f, fieldnames=["id", "title", "body"])
+        with open('posts.csv', 'w', newline='', encoding='utf-8') as csvfile:
+            writer = csv.DictWriter(csvfile, ['id', 'title', 'body'])
             writer.writeheader()
-            writer.writerows(data)
-        print("Les posts ont été enregistrés dans posts.csv ✅")
+            writer.writerows(structured_data)
+        
+        return True
     else:
-        print("Erreur lors de la récupération des posts.")
+        print(f"Request error : {response.status_code}")
+        return False
