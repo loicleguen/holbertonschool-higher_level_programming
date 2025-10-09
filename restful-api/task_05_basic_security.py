@@ -20,7 +20,6 @@ auth = HTTPBasicAuth()
 # 🔑 Secret key pour JWT - utiliser une variable d'environnement en production
 app.config["JWT_SECRET_KEY"] =  'your_secret_key_here'
 
-
 jwt = JWTManager(app)
 
 # Users in memory
@@ -67,7 +66,7 @@ def login():
     user = users.get(username)
     
     if not user or not check_password_hash(user["password"], password):
-        return jsonify({"error": "Invalid username or password"}), 401
+        return jsonify({"error": "Invalid credentials"}), 401
     
     # ✅ Identity stocke uniquement le username
     access_token = create_access_token(
