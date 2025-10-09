@@ -41,26 +41,16 @@ users = {
 # ----- Basic Auth -----
 @auth.verify_password
 def verify_password(username, password):
-    user = users.get(username)
-    if user and check_password_hash(user["password"], password):
-        return user
+    if username in users and check_password_hash(users[username]["password"], password):
+        return username
     return None
-
-
-@auth.error_handler
-def unauthorized():
-    return jsonify({"error": "Unauthorized Access"}), 401
 
 
 @app.route("/basic-protected", methods=["GET"])
 @auth.login_required
 def basic_protected():
-    user = auth.current_user()
-    return jsonify({
-        "message": "Basic Auth: Access Granted",
-        "user": user["username"],
-        "role": user["role"]
-    })
+    """Protected route using Basic Authentication"""
+    return "Basic Auth: Access Granted"
 
 
 # ----- JWT Login -----
