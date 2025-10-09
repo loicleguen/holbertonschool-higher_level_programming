@@ -12,14 +12,14 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 from werkzeug.security import generate_password_hash, check_password_hash
-import os
+
 
 app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 # 🔑 Secret key pour JWT - utiliser une variable d'environnement en production
-app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "super-secret-key-change-in-production")
-app.config["JWT_ACCESS_TOKEN_EXPIRES"] = 3600  # 1 heure
+app.config["JWT_SECRET_KEY"] =  'your_secret_key_here'
+
 
 jwt = JWTManager(app)
 
@@ -52,7 +52,7 @@ def unauthorized():
     return jsonify({"error": "Unauthorized Access"}), 401
 
 
-@app.route("/basic-protected")
+@app.route("/basic-protected", methods=["GET"])
 @auth.login_required
 def basic_protected():
     user = auth.current_user()
@@ -93,7 +93,7 @@ def login():
 
 
 # ----- JWT Protected Route -----
-@app.route("/jwt-protected")
+@app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protected():
     current_username = get_jwt_identity()
@@ -110,7 +110,7 @@ def jwt_protected():
 
 
 # ----- Admin Only Route -----
-@app.route("/admin-only")
+@app.route("/admin-only" , methods=["GET"])
 @jwt_required()
 def admin_only():
     current_username = get_jwt_identity()
