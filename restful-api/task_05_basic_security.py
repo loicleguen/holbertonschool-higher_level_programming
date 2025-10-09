@@ -55,66 +55,37 @@ def basic_protected():
 # ----- JWT Login -----
 @app.route("/login", methods=["POST"])
 def login():
+    """Login endpoint that returns JWT token upon successful authentication"""
     data = request.get_json()
-    
-    if not data or "username" not in data or "password" not in data:
-        return jsonify({"error": "Missing credentials"}), 400
-    
-    username = data["username"]
-    password = data["password"]
-    
+    username = data.get('username')
+    password = data.get('password')
     user = users.get(username)
-    
-    if not user or not check_password_hash(user["password"], password):
-        return jsonify({"error": "Invalid credentials"}), 401
-    
-    # ✅ Identity stocke uniquement le username
-    access_token = create_access_token(
-        identity=username,
-        additional_claims={"role": user["role"]}
-    )
-    
-    return jsonify({
-        "access_token": access_token,
-        "username": username,
-        "role": user["role"]
-    }), 200
+    if user and check_password_hash(user['password'], password):
+        # Create JWT token with user identity and role
+        access_token = create_access_token(
+            identity={'username': username,
+                      'role': user['role']})
+        return jsonify(access_token=access_token)
+    return jsonify({"error": "Invalid credentials"}), 401
 
 
 # ----- JWT Protected Route -----
 @app.route("/jwt-protected", methods=["GET"])
 @jwt_required()
 def jwt_protected():
-    current_username = get_jwt_identity()
-    user = users.get(current_username)
-    
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-    
-    return jsonify({
-        "message": "JWT Auth: Access Granted",
-        "user": current_username,
-        "role": user["role"]
-    })
+    """Protected route using JWT Authentication"""
+    return "JWT Auth: Access Granted"
 
 
 # ----- Admin Only Route -----
 @app.route("/admin-only" , methods=["GET"])
 @jwt_required()
 def admin_only():
-    current_username = get_jwt_identity()
-    user = users.get(current_username)
-    
-    if not user:
-        return jsonify({"error": "User not found"}), 404
-    
-    if user["role"] != "admin":
+    """Endpoint restricted to users with admin role"""
+    current_user = get_jwt_identity()
+    if current_user['role'] != 'admin':
         return jsonify({"error": "Admin access required"}), 403
-    
-    return jsonify({
-        "message": "Admin Access: Granted",
-        "user": current_username
-    })
+    return "Admin Access: Granted"
 
 
 # ----- JWT Error Handlers -----
