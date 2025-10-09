@@ -52,21 +52,21 @@ def login():
         return jsonify({"error": "Invalid username or password"}), 401
 
     # ✅ Encode identity en JSON string pour compatibilité
-    access_token = create_access_token(identity=json.dumps({"username": username, "role": user["role"]}))
+    access_token = create_access_token(identity=({"username": username, "role": user["role"]}))
     return jsonify({"access_token": access_token}), 200
 
 # ----- JWT Protected Route -----
 @app.route("/jwt-protected")
 @jwt_required()
 def jwt_protected():
-    current_user = json.loads(get_jwt_identity())
+    current_user = get_jwt_identity()
     return "JWT Auth: Access Granted"
 
 # ----- Admin Only Route -----
 @app.route("/admin-only")
 @jwt_required()
 def admin_only():
-    current_user = json.loads(get_jwt_identity())
+    current_user = (get_jwt_identity())
     if current_user["role"] != "admin":
         return jsonify({"error": "Admin access required"}), 403
     return "Admin Access: Granted"
