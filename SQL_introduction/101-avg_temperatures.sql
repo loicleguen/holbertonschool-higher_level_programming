@@ -1,4 +1,5 @@
-SELECT city, ROUND(AVG(value, 4)) AS averagetemp
-FROM temperature
+-- Display the average temperature (Fahrenheit) by city ordered by temperature (descending)
+SELECT city, AVG(value) AS avg_temp
+FROM temperatures
 GROUP BY city
-ORDER BY averagetemp desc
+ORDER BY avg_temp DESC;
