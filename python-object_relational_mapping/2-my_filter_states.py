@@ -18,7 +18,7 @@ if __name__ == "__main__":
         user=username,
         passwd=password,
         db=database,
-        state=state,
+        statename=state,
         charset="utf8"
     )
 
@@ -27,7 +27,7 @@ if __name__ == "__main__":
 
     # Execute the SQL query
     cur.execute(
-        "SELECT * FROM states WHERE BINARY name = '{}'.format(state)"
+        "SELECT * FROM states WHERE BINARY name = '{}'.format(statename)"
         "ORDER BY id ASC")
 
     # Fetch and display all results
