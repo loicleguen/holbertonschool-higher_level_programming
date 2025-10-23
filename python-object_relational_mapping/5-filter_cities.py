@@ -28,17 +28,18 @@ if __name__ == "__main__":
     cur = db.cursor()
 
     # Execute the SQL query
-    cur.execute("""
+    query = """
         SELECT cities.name
         FROM cities
         JOIN states ON cities.state_id = states.id
-        WHERE state.id = %s
-        ORDER BY cities.id ASC"""(state_name)
-                )
+        WHERE states.name = %s
+        ORDER BY cities.id ASC
+    """
+    cur.execute(query, (state_name,))
 
-    # Fetch and display all results
-    for row in cur.fetchall():
-        print(row)
+    # Fetch results and print as comma-separated string
+    cities = [row[0] for row in cur.fetchall()]
+    print(", ".join(cities))
 
     # Close cursor and database connection
     cur.close()
