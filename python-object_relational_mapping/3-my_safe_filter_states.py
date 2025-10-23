@@ -30,7 +30,8 @@ if __name__ == "__main__":
     # Execute the SQL query
     cur.execute(
         "SELECT * FROM states WHERE BINARY "
-        "name = %s ORDER BY id ASC", (state_name))
+        "name = %s ORDER BY id ASC", (state_name)
+        )
 
     # Fetch and display all results
     for row in cur.fetchall():
