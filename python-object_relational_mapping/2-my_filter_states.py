@@ -9,7 +9,8 @@ import sys
 
 if __name__ == "__main__":
     # Get MySQL credentials and database name from command-line arguments
-    username, password, database, state = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+    username, password, database, state_name = sys.argv[1],
+    sys.argv[2], sys.argv[3], sys.argv[4]
 
     # Connect to the MySQL server
     db = MySQLdb.connect(
@@ -18,7 +19,6 @@ if __name__ == "__main__":
         user=username,
         passwd=password,
         db=database,
-        statename=state,
         charset="utf8"
     )
 
@@ -27,8 +27,8 @@ if __name__ == "__main__":
 
     # Execute the SQL query
     cur.execute(
-        "SELECT * FROM states WHERE BINARY name = '{}'.format(statename)"
-        "ORDER BY id ASC")
+        "SELECT * FROM states WHERE BINARY name = '{}' ORDER "
+        "BY id ASC".format(state_name))
 
     # Fetch and display all results
     for row in cur.fetchall():
