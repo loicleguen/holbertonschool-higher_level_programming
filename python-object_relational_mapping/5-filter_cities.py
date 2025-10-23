@@ -33,7 +33,7 @@ if __name__ == "__main__":
         FROM cities
         JOIN states ON cities.state_id = states.id
         WHERE states.name = %s
-        ORDER BY cities.id ASC
+        ORDER BY cities.name ASC
     """
     cur.execute(query, (state_name,))
 
