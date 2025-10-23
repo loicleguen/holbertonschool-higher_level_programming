@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     # Execute the SQL query
     query = """
-        SELECT cities.name
+        SELECT DISTINCT cities.name
         FROM cities
         JOIN states ON cities.state_id = states.id
         WHERE states.name = %s
