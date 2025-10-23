@@ -28,14 +28,13 @@ if __name__ == "__main__":
     cur = db.cursor()
 
     # Execute the SQL query
-    cur.execute(
-        """SELECT cities.name
+    cur.execute("""
+        SELECT cities.name
         FROM cities
         JOIN states ON cities.state_id = states.id
         WHERE state.id = %s
-        ORDER BY cities.id ASC"""
-        (state_name)
-    )
+        ORDER BY cities.id ASC"""(state_name)
+                )
 
     # Fetch and display all results
     for row in cur.fetchall():
