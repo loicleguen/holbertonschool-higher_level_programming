@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all states with a name starting with N.
+Displays all values in the states table where name matches the argument.
 """
 
 import MySQLdb
