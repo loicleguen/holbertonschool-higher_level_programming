@@ -27,9 +27,8 @@ if __name__ == "__main__":
     session = Session(engine)
 
     # Query all State objects containing 'a' in the name, ordered by id
-    states = session.query(
-        (State).filter(State.name.like('%a%')).order_by(State.id).all()
-    )
+    states = session.query(State).filter(
+        State.name.like('%a%')).order_by(State.id).all()
 
     # Print results
     for state in states:
