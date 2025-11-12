@@ -18,7 +18,7 @@
         th, td {
             border: 1px solid #ddd;
             padding: 12px;
-            text-align: left;
+            text-align: center;
         }
         th {
             background-color: #4CAF50;
@@ -58,7 +58,7 @@
                 <tr>
                     <td>{{ product.name }}</td>
                     <td>{{ product.category }}</td>
-                    <td>${{ "%.2f"|format(product.price) }}</td>
+                    <td>{{ "%.2f "|format(product.price) }}€</td>
                 </tr>
                 {% endfor %}
             </tbody>
